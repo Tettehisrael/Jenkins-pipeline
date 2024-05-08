@@ -39,7 +39,6 @@ pipeline {
                     dir('terraform'){
                          sh 'terraform init'
                     }
-                    input(message: "Are you sure to proceed?", ok: "proceed")
                 }
             }
         }
