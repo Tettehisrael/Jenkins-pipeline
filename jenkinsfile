@@ -37,7 +37,7 @@ pipeline {
             steps{
                 script{
                     dir('terraform'){
-                         sh 'terraform int'
+                         sh 'terraform init'
                     }
                     input(message: "Are you sure to proceed?", ok: "proceed")
                 }
