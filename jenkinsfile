@@ -33,11 +33,11 @@ pipeline {
                 }
             }
         }
-        stage('Previewing the infrastructure'){
+        stage('Iniializing terraform'){
             steps{
                 script{
                     dir('terraform'){
-                         sh 'terraform plan'
+                         sh 'terraform int'
                     }
                     input(message: "Are you sure to proceed?", ok: "proceed")
                 }
@@ -52,7 +52,7 @@ pipeline {
                 }
             }
         }
-        stage("Deploying Nginx"){
+        stage("Deploying EKS"){
             steps{
                 script{
                     dir('kubernetes'){
