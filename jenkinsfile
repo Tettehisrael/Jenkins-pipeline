@@ -36,7 +36,7 @@ pipeline {
         stage('Previewing the infrastructure'){
             steps{
                 script{
-                    dir('EKS'){
+                    dir('terraform'){
                          sh 'terraform plan'
                     }
                     input(message: "Are you sure to proceed?", ok: "proceed")
@@ -46,8 +46,8 @@ pipeline {
         stage('Creating/Destroying an EKS cluster'){
             steps{
                 script{
-                    dir('EKS'){
-                         sh 'terraform $action --auto-approve'
+                    dir('terraform'){
+                         sh 'terraform apply -auto-approve'
                     }
                 }
             }
