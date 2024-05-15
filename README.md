@@ -1,1 +1,1 @@
-## End-to-end deployment of Applications to Kubernetes using a Jenkins CI/CD Pipeline
+## Jenkins CI/CD Pipeline
