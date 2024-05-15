@@ -9,7 +9,7 @@ pipeline {
         stage('Initializing Terraform'){
             steps{
                 script{
-                    dir('EKS'){
+                    dir('terraform'){
                          sh 'terraform init'
                     }
                 }
@@ -18,7 +18,7 @@ pipeline {
         stage('Formating terraform code'){
             steps{
                 script{
-                    dir('EKS'){
+                    dir('terraform'){
                          sh 'terraform fmt'
                     }
                 }
@@ -27,18 +27,19 @@ pipeline {
         stage('Validating Terraform'){
             steps{
                 script{
-                    dir('EKS'){
+                    dir('terraform'){
                          sh 'terraform validate'
                     }
                 }
             }
         }
-        stage('Iniializing terraform'){
+        stage('Previewing the infrastructure'){
             steps{
                 script{
                     dir('terraform'){
-                         sh 'terraform init'
+                         sh 'terraform plan'
                     }
+                    input(message: "Are you sure to proceed?", ok: "proceed")
                 }
             }
         }
@@ -46,7 +47,6 @@ pipeline {
             steps{
                 script{
                     dir('terraform'){
-                         sh 'terraform plan'
                          sh 'terraform apply -auto-approve'
                     }
                 }
